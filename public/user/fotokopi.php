@@ -70,7 +70,7 @@
 
             <!-- Welcome Banner -->
             <div id="banner" class="bg-purple-700 text-white text-right py-4 px-6 pr-2 w-15 pl-15 rounded-lg mb-8 relative mx-auto">
-                <img id="icon-cafung" src="/CafungE/public/asset/logoCafung.jpg" alt="" class="w-44 h-44 rounded-full absolute top-[-30px] left-[-20px] border-4 border-white">
+                <img id="icon-cafung" src="/public/asset/logoCafung.jpg" alt="" class="w-44 h-44 rounded-full absolute top-[-30px] left-[-20px] border-4 border-white">
                 <h2 id="selamatDatang" class="text-2xl lg:text-4xl px-10 font-semibold">Selamat Datang di Cafe Ungu <br> Universitas Amikom Purwokerto</h2>
             </div >
 
