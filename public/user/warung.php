@@ -16,7 +16,7 @@ if (!$result) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daftar Kedai - Cafe Ungu</title>
-    <link rel="stylesheet" href="/CafungE/public/css/style.css">
+    <link rel="stylesheet" href="/public/css/style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
     <style>
@@ -66,7 +66,7 @@ if (!$result) {
 
 <!-- Welcome Banner -->
 <div id="banner" class="bg-purple-700 text-white text-right py-4 px-6 pr-2 w-15 pl-15 rounded-lg mb-8 relative mx-auto">
-    <img id="icon-cafung" src="/CafungE/public/asset/logoCafung.jpg" alt="" class="w-44 h-44 rounded-full absolute top-[-30px] left-[-20px] border-4 border-white">
+    <img id="icon-cafung" src="/public/asset/logoCafung.jpg" alt="" class="w-44 h-44 rounded-full absolute top-[-30px] left-[-20px] border-4 border-white">
     <h2  id="selamatDatang" class="text-2xl lg:text-4xl px-10 font-semibold ">Selamat Datang di Cafe Ungu <br> Universitas Amikom Purwokerto</h2>
 </div class="">
             <!-- Navigation Buttons -->
