@@ -31,7 +31,7 @@
                 <i class="fas fa-shopping-cart text-6xl mb-4"></i>
                 <p>Belum Ada Pesanan</p>
             </div>
-            <button class="w-full px-4 py-2 bg-purple-400 text-white rounded-full mt-4">
+            <button class="w-full px-4 py-2 bg-purple-700 text-white rounded-full mt-4">
                 Silahkan Pilih Pesanan
             </button>
         </div>
@@ -65,65 +65,72 @@
 <div id="banner" class="bg-purple-700 text-white text-right py-4 px-6 pr-2 w-15 pl-15 rounded-lg mb-8 relative mx-auto">
     <img id="icon-cafung" src="/CafungE/public/asset/logoCafung.jpg" alt="" class="w-44 h-44 rounded-full absolute top-[-30px] left-[-20px] border-4 border-white">
     <h2  id="selamatDatang" class="text-2xl lg:text-4xl px-10 font-semibold ">Selamat Datang di Cafe Ungu <br> Universitas Amikom Purwokerto</h2>
-</div >
+</div class="">
             <!-- Navigation Buttons -->
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-px justify-items-center mb-6">
-                <a href="index.html" class="flex flex-col items-center text-purple-700">
+                <a href="index.php" class="flex flex-col items-center text-purple-700">
                     <i class="fas fa-utensils text-3xl mb-1"></i>
                     <span>Beranda</span>
                 </a>
-                <a href="menu.html" class="flex flex-col items-center text-purple-700">
+                <a href="menu.php" class="flex flex-col items-center text-purple-700">
                     <i class="fas fa-coffee text-3xl mb-1"></i>
                     <span>Menu Baru</span>
                 </a>
-                <a href="warung.html" class="flex flex-col items-center text-purple-700">
+                <a href="warung.php" class="flex flex-col items-center text-purple-700">
                     <i class="fas fa-store text-3xl mb-1"></i>
                     <span>Warung</span>
                 </a>
                 
-                <a href="fotokopi.html" class="flex flex-col items-center text-purple-700">
+                <a href="fotokopi.php" class="flex flex-col items-center text-purple-700">
                     <i class="fas fa-box text-3xl mb-1"></i>
                     <span>Fotokopi</span>
                 </a>
             </div>
 
             <!-- Daftar Makanan -->
-            <h3 class="text-xl font-semibold mb-4">Makanan</h3>
+            <h3 class="text-xl font-semibold mb-4">Menu Terbaru</h3>
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-                <div class="bg-white p-4 rounded-lg shadow">
-                    <img src="https://via.placeholder.com/150" alt="Makanan" class="w-full h-32 object-cover rounded-lg mb-4" />
-                    <h4 class="text-lg font-semibold">Ayam Geprek</h4>
-                    <p class="text-gray-500">Ayam, sambal, lalapan</p>
+                <!-- Card 1 -->
+                <a href="/kedai/ayam-geprek" class="block bg-white p-4 rounded-lg shadow hover:shadow-lg transition-shadow">
+                    <img src="https://via.placeholder.com/150" alt="Ayam Geprek" class="w-full h-32 object-cover rounded-lg mb-4">
+                    <h4 class="text-lg font-semibold text-gray-800">Ayam Geprek</h4>
+                    <p class="text-gray-500">Ayam crispy dengan sambal pedas</p>
                     <div class="mt-4">
                         <span class="text-purple-700 font-bold">Rp 20.000</span>
                     </div>
-                </div>
-                <!-- Duplikat elemen lainnya -->
-                <div class="bg-white p-4 rounded-lg shadow">
-                    <img src="https://via.placeholder.com/150" alt="Makanan" class="w-full h-32 object-cover rounded-lg mb-4" />
-                    <h4 class="text-lg font-semibold">Pentol Bakar</h4>
-                    <p class="text-gray-500">Pentol, saus kacang</p>
+                </a>
+            
+                <!-- Card 2 -->
+                <a href="/kedai/pentol-bakar" class="block bg-white p-4 rounded-lg shadow hover:shadow-lg transition-shadow">
+                    <img src="https://via.placeholder.com/150" alt="Pentol Bakar" class="w-full h-32 object-cover rounded-lg mb-4">
+                    <h4 class="text-lg font-semibold text-gray-800">Pentol Bakar</h4>
+                    <p class="text-gray-500">Pentol bakar saus kacang</p>
                     <div class="mt-4">
-                        <span class="text-purple-700 font-bold">Rp 20.000</span>
+                        <span class="text-purple-700 font-bold">Rp 15.000</span>
                     </div>
-                </div>
+                </a>
+            
+                <!-- Card 3 -->
+                <a href="/kedai/es-teh" class="block bg-white p-4 rounded-lg shadow hover:shadow-lg transition-shadow">
+                    <img src="https://via.placeholder.com/150" alt="Es Teh" class="w-full h-32 object-cover rounded-lg mb-4">
+                    <h4 class="text-lg font-semibold text-gray-800">Es Teh</h4>
+                    <p class="text-gray-500">Teh segar dengan es batu</p>
+                    <div class="mt-4">
+                        <span class="text-purple-700 font-bold">Rp 5.000</span>
+                    </div>
+                </a>
+            
+                <!-- Card 4 -->
+                <a href="/kedai/kopi-susu" class="block bg-white p-4 rounded-lg shadow hover:shadow-lg transition-shadow">
+                    <img src="https://via.placeholder.com/150" alt="Kopi Susu" class="w-full h-32 object-cover rounded-lg mb-4">
+                    <h4 class="text-lg font-semibold text-gray-800">Kopi Susu</h4>
+                    <p class="text-gray-500">Kopi hitam dengan susu segar</p>
+                    <div class="mt-4">
+                        <span class="text-purple-700 font-bold">Rp 12.000</span>
+                    </div>
+                </a>
             </div>
-
-            <!-- Daftar Minuman -->
-            <h3 class="text-xl font-semibold mt-8 mb-4">Minuman</h3>
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-                <div class="bg-white p-4 rounded-lg shadow">
-                    <img src="https://via.placeholder.com/150" alt="Minuman" class="w-full h-32 object-cover rounded-lg mb-4" />
-                    <h4 class="text-lg font-semibold">Es Teh</h4>
-                    <p class="text-gray-500">Teh segar dengan es</p>
-                </div>
-                <!-- Duplikat elemen lainnya -->
-                <div class="bg-white p-4 rounded-lg shadow">
-                    <img src="https://via.placeholder.com/150" alt="Minuman" class="w-full h-32 object-cover rounded-lg mb-4" />
-                    <h4 class="text-lg font-semibold">Kopi Susu</h4>
-                    <p class="text-gray-500">Kopi dengan susu segar</p>
-                </div>
-            </div>
+            
         </div>
     </div>
 

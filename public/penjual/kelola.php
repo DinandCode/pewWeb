@@ -63,7 +63,7 @@ $result = mysqli_query($conn, $query);
         <!-- Main Content -->
         <div class="flex-1 p-6">
             <h1 class="text-2xl font-bold mb-4">Kelola Produk</h1>
-            <a href="../../config/tambah_produk.php" class="bg-blue-500 text-white px-4 py-2 rounded-lg mb-4 ">Tambah Produk</a>
+            <a href="tambah_produk.php" class="bg-blue-500 text-white px-4 py-2 rounded-lg mb-4 ">Tambah Produk</a>
             <table class="w-full bg-white mt-5 shadow-md rounded-lg">
             <thead class="bg-gray-700 text-white">
                 <tr>

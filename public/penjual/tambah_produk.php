@@ -1,7 +1,9 @@
 
 <?php
 
-include 'koneksi.php'; // Sesuaikan path ke file koneksi database
+include '../../config/koneksi.php';
+
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
    
@@ -13,9 +15,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $harga = intval($_POST['harga_produk']);
     $stok = intval($_POST['stok_produk']);
     $deskripsi = htmlspecialchars($_POST['deskripsi']);
+    
+    // Proses upload gambar
+    $nama_gambar = null; // Default jika tidak ada gambar
+    if (isset($_FILES['gambar']) && $_FILES['gambar']['error'] === UPLOAD_ERR_OK) {
+        $nama_gambar = basename($_FILES['gambar']['name']); // Hanya nama file
+        $tmp_gambar = $_FILES['gambar']['tmp_name'];
+        $folder_upload = '../asset/'; // Folder tempat menyimpan gambar
+
+        // Cek dan buat folder jika belum ada
+        if (!is_dir($folder_upload)) {
+            mkdir($folder_upload, 0777, true);
+        }
+
+        // Pindahkan file gambar ke folder tujuan
+        $path_gambar = $folder_upload . $nama_gambar;
+        if (!move_uploaded_file($tmp_gambar, $path_gambar)) {
+            die("Gagal mengupload gambar.");
+        }
+    }
 
     // Query untuk menyimpan data produk
-    $query = "INSERT INTO produk (kedai_id,nama_produk, harga, stok, deskripsi) VALUES ($kedai_id,'$nama_produk', '$harga', '$stok', '$deskripsi')";
+    $query = "INSERT INTO produk (kedai_id, nama_produk, harga, stok, deskripsi, gambar) 
+              VALUES ($kedai_id, '$nama_produk', '$harga', '$stok', '$deskripsi', '$nama_gambar')";
     $result = mysqli_query($conn, $query);
 
     if ($result) {
@@ -28,8 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         showConfirmButton: true
                     }).then((result) => {
                         if (result.isConfirmed) {
-                        
-                            window.location.href = '../public/penjual/kelola.php';
+                            window.location.href = 'kelola.php';
                         }
                     });
                 });
@@ -49,6 +70,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
+
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -65,13 +88,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <h2 class="text-2xl font-semibold text-center text-purple-700 mb-4">Tambah Produk</h2>
 
         <!-- Form Input -->
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
         <!-- Nama Produk -->
             <div class="mb-4">
                 <label for="nama_produk" class="block text-sm font-medium text-gray-700 mb-1">Nama Produk</label>
                 <input type="text" id="nama_produk" name="nama_produk" placeholder="Contoh: Nasi Goreng" 
                     class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:outline-none" required>
             </div>
+            <div class="mb-4">
+    <label for="gambar" class="block text-sm font-medium text-gray-700 mb-1">Upload Gambar</label>
+    <input type="file" id="gambar" name="gambar" 
+        class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:outline-none" accept="image/*">
+</div>
 
             <!-- Harga Produk -->
             <div class="mb-4">

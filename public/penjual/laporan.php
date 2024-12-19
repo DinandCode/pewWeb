@@ -16,24 +16,22 @@
                     <img src="/public/asset/logoCafung.jpg" class="w-1/2 rounded-full" alt="">
                 </div>
                 <ul class="mt-6 space-y-1">
+                   
                     <li>
-                        <a href="dashboard.html" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Dashboard</a>
+                        <a href="kelola.php" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Kelola Produk</a>
                     </li>
                     <li>
-                        <a href="kelola.html" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Kelola Produk</a>
+                        <a href="pesanan.php" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Pesanan</a>
                     </li>
                     <li>
-                        <a href="pesanan.html" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Pesanan</a>
+                        <a href="laporan.php" class="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700">Laporan Penjualan</a>
                     </li>
                     <li>
-                        <a href="laporan.html" class="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700">Laporan Penjualan</a>
-                    </li>
-                    <li>
-                        <a href="setting.html" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Pengaturan</a>
+                        <a href="setting.php" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Pengaturan</a>
                     </li>
                     <li>
                         <form action="#">
-                            <a href="/CafungE/public/login/login.html" type="submit" class="w-full text-center rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Logout</a>
+                            <a href="/CafungE/public/login/login.php" type="submit" class="w-full text-center rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Logout</a>
                         </form>
                     </li>
                 </ul>

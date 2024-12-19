@@ -59,7 +59,7 @@
             <div class="flex items-center justify-between mb-8">
                 <div class="flex items-center">
                     <div class="ml-4">
-                        <a href="index.html" class="btn-back">
+                        <a href="index.php" class="btn-back">
                             <i class="fas fa-arrow-left mr-2"></i> Kembali ke Beranda
                         </a>
                     </div>
