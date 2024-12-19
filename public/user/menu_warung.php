@@ -1,3 +1,22 @@
+<?php
+include '../../config/koneksi.php'; // Koneksi ke database
+
+// Periksa apakah kedai_id ada dalam URL
+$kedai_id = isset($_COOKIE['kedai_id']) ? intval($_COOKIE['kedai_id']) : 0;
+
+// Validasi kedai_id
+if ($kedai_id <= 0) {
+    die("Kedai ID tidak valid.");
+}
+
+// Query untuk mengambil data berdasarkan kedai_id
+$query = "SELECT * FROM produk WHERE kedai_id = $kedai_id";
+$result = mysqli_query($conn, $query);
+
+if (!$result) {
+    die("Query Error: " . mysqli_error($conn));
+}
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -67,33 +86,16 @@
 
             <!-- Daftar Menu -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Card Menu -->
-                <div class="menu-card bg-white rounded-lg shadow-md overflow-hidden p-4">
-                    <img src="https://via.placeholder.com/300" alt="Menu 1" class="w-full h-40 object-cover mb-4">
-                    <h3 class="text-lg font-semibold mb-2">Ayam Geprek Sambal Bawang</h3>
-                    <p class="text-gray-500 mb-2">Rp 15.000</p>
-                    <button onclick="tambahPesanan('Ayam Geprek Sambal Bawang', 15000)" class="px-4 py-2 bg-green-500 text-white rounded-full w-full">
-                        Tambah Pesanan
-                    </button>
-                </div>
-
-                <div class="menu-card bg-white rounded-lg shadow-md overflow-hidden p-4">
-                    <img src="https://via.placeholder.com/300" alt="Menu 2" class="w-full h-40 object-cover mb-4">
-                    <h3 class="text-lg font-semibold mb-2">Ayam Geprek Keju</h3>
-                    <p class="text-gray-500 mb-2">Rp 18.000</p>
-                    <button onclick="tambahPesanan('Ayam Geprek Keju', 18000)" class="px-4 py-2 bg-green-500 text-white rounded-full w-full">
-                        Tambah Pesanan
-                    </button>
-                </div>
-
-                <div class="menu-card bg-white rounded-lg shadow-md overflow-hidden p-4">
-                    <img src="https://via.placeholder.com/300" alt="Menu 3" class="w-full h-40 object-cover mb-4">
-                    <h3 class="text-lg font-semibold mb-2">Ayam Geprek Mozarella</h3>
-                    <p class="text-gray-500 mb-2">Rp 20.000</p>
-                    <button onclick="tambahPesanan('Ayam Geprek Mozarella', 20000)" class="px-4 py-2 bg-green-500 text-white rounded-full w-full">
-                        Tambah Pesanan
-                    </button>
-                </div>
+                <?php while ($row = mysqli_fetch_assoc($result)): ?>
+                    <div class="menu-card bg-white rounded-lg shadow-md overflow-hidden p-4">
+                        <img src="<?= htmlspecialchars($row['gambar']) ?>" alt="<?= htmlspecialchars($row['nama_produk']) ?>" class="w-full h-40 object-cover mb-4">
+                        <h3 class="text-lg font-semibold mb-2"><?= htmlspecialchars($row['nama_produk']) ?></h3>
+                        <p class="text-gray-500 mb-2">Rp <?= number_format($row['harga'], 0, ',', '.') ?></p>
+                        <button onclick="tambahPesanan('<?= htmlspecialchars($row['nama_produk']) ?>', <?= $row['harga'] ?>)" class="px-4 py-2 bg-green-500 text-white rounded-full w-full">
+                            Tambah Pesanan
+                        </button>
+                    </div>
+                <?php endwhile; ?>
             </div>
         </div>
     </div>
