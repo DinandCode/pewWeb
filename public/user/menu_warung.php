@@ -1,21 +1,25 @@
 <?php
 include '../../config/koneksi.php'; // Koneksi ke database
 
-// Periksa apakah kedai_id ada dalam URL
-$kedai_id = isset($_COOKIE['kedai_id']) ? intval($_COOKIE['kedai_id']) : 0;
 
-// Validasi kedai_id
+$kedai_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+
+
 if ($kedai_id <= 0) {
     die("Kedai ID tidak valid.");
 }
 
-// Query untuk mengambil data berdasarkan kedai_id
-$query = "SELECT * FROM produk WHERE kedai_id = $kedai_id";
-$result = mysqli_query($conn, $query);
+$query_kedai = "SELECT nama_kedai FROM kedai WHERE id = $kedai_id";
+$result_kedai = mysqli_query($conn, $query_kedai);
 
-if (!$result) {
-    die("Query Error: " . mysqli_error($conn));
+if ($result_kedai && mysqli_num_rows($result_kedai) > 0) {
+    $data_kedai = mysqli_fetch_assoc($result_kedai);
+    $nama_kedai = $data_kedai['nama_kedai'];
+} else {
+    $nama_kedai = "Kedai Tidak Ditemukan";
 }
+$query_produk = "SELECT * FROM produk WHERE kedai_id = $kedai_id";
+$result_produk = mysqli_query($conn, $query_produk);
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -71,8 +75,8 @@ if (!$result) {
         <div id="main-content" class="w-full lg:w-[calc(100%-0px)] p-8">
             <!-- Header -->
             <div class="flex items-center justify-between mb-8">
-                <h1 class="text-3xl lg:text-4xl font-bold text-purple-700">Kedai Ayam Geprek</h1>
-                <div class="ml-4">
+            <h1 class="text-3xl lg:text-4xl font-bold text-purple-700"><?= htmlspecialchars($nama_kedai) ?></h1>
+            <div class="ml-4">
                     <button onclick="toggleSidebar()" class="px-4 py-2 bg-purple-700 text-white rounded-full">
                         <i class="fas fa-shopping-cart"></i>
                     </button>
@@ -85,10 +89,17 @@ if (!$result) {
             </div>
 
             <!-- Daftar Menu -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <?php while ($row = mysqli_fetch_assoc($result)): ?>
+            <div class="p-8">
+        <!-- Header -->
+        <h1 class="text-3xl font-bold mb-4 text-purple-700"><?= htmlspecialchars($nama_kedai) ?></h1>
+        <h2 class="text-xl mb-4">Daftar Menu</h2>
+
+        <!-- Daftar Menu -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <?php if ($result_produk && mysqli_num_rows($result_produk) > 0): ?>
+                <?php while ($row = mysqli_fetch_assoc($result_produk)): ?>
                     <div class="menu-card bg-white rounded-lg shadow-md overflow-hidden p-4">
-                        <img src="<?= htmlspecialchars($row['gambar']) ?>" alt="<?= htmlspecialchars($row['nama_produk']) ?>" class="w-full h-40 object-cover mb-4">
+                        <img src="/public/asset/<?= htmlspecialchars($row['gambar']) ?>" alt="<?= htmlspecialchars($row['nama_produk']) ?>" class="w-full h-40 object-cover mb-4">
                         <h3 class="text-lg font-semibold mb-2"><?= htmlspecialchars($row['nama_produk']) ?></h3>
                         <p class="text-gray-500 mb-2">Rp <?= number_format($row['harga'], 0, ',', '.') ?></p>
                         <button onclick="tambahPesanan('<?= htmlspecialchars($row['nama_produk']) ?>', <?= $row['harga'] ?>)" class="px-4 py-2 bg-green-500 text-white rounded-full w-full">
@@ -96,7 +107,11 @@ if (!$result) {
                         </button>
                     </div>
                 <?php endwhile; ?>
-            </div>
+            <?php else: ?>
+                <p class="text-gray-500">Belum ada menu tersedia.</p>
+            <?php endif; ?>
+        </div>
+    </div>
         </div>
     </div>
 
