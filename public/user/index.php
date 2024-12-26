@@ -49,6 +49,7 @@ $conn->close(); // Tutup koneksi
             <button class="w-full px-4 py-2 bg-purple-500 hover:bg-purple-600 text-white rounded-full mt-4">
                 Silahkan Pilih Pesanan
             </button>
+            
         </div>
 
         <!-- Main Content -->
@@ -109,7 +110,13 @@ $conn->close(); // Tutup koneksi
                 <p class="text-gray-500"><?php echo htmlspecialchars($item['deskripsi']); ?></p>
                 <div class="mt-4">
                     <span class="text-purple-700 font-bold">Rp <?php echo number_format($item['harga'], 0, ',', '.'); ?></span>
+                    <button 
+            onclick="tambahPesanan('<?php echo htmlspecialchars($item['nama_produk']); ?>', <?php echo $item['harga']; ?>)" 
+            class="px-4 py-2 bg-green-500 text-white rounded-full w-full">
+            Tambah
+        </button>
                 </div>
+
                 
             </div>
         <?php endforeach; ?>
@@ -121,6 +128,51 @@ $conn->close(); // Tutup koneksi
             <!-- Daftar Minuman -->
            
     <script>
+
+        // tambah pesanan 
+        let pesanan = [];
+        function tambahPesanan(namaProduk, harga) {
+    // Tambahkan produk ke dalam array pesanan
+            pesanan.push({ nama: namaProduk, harga: harga });
+               updateSidebar();
+}
+function updateSidebar() {
+    const listPesananContainer = document.querySelector('.text-center.text-gray-500');
+    const totalButton = document.querySelector('.w-full.bg-purple-500');
+
+    // Kosongkan kontainer pesanan
+    listPesananContainer.innerHTML = '';
+
+    // Jika tidak ada pesanan
+    if (pesanan.length === 0) {
+        listPesananContainer.innerHTML = `
+            <i class="fas fa-shopping-cart text-6xl mb-4"></i>
+            <p>Belum Ada Pesanan</p>
+        `;
+        totalButton.textContent = 'Silahkan Pilih Pesanan';
+        return;
+    }
+
+    // Tampilkan daftar pesanan
+    let totalHarga = 0;
+    const ul = document.createElement('ul');
+    ul.classList.add('mb-4', 'text-left');
+    pesanan.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.classList.add('flex', 'justify-between', 'items-center', 'border-b', 'pb-2', 'mb-2');
+        li.innerHTML = `
+            <span>${item.nama}</span>
+            <span>Rp ${item.harga.toLocaleString()}</span>
+        `;
+        ul.appendChild(li);
+        totalHarga += item.harga;
+    });
+    listPesananContainer.appendChild(ul);
+
+    // Perbarui total harga
+    totalButton.textContent = `Total: Rp ${totalHarga.toLocaleString()}`;
+}
+
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('overlay');

@@ -66,9 +66,36 @@ $result_produk = mysqli_query($conn, $query_produk);
                 <p>Belum Ada Pesanan</p>
             </div>
             <ul id="list-pesanan" class="space-y-4 hidden"></ul>
-            <button class="w-full px-4 py-2 bg-purple-700 text-white rounded-full mt-4">
+            <button id="btn-selesaikan-pesanan" class="w-full px-4 py-2 bg-purple-700 text-white rounded-full mt-4">
                 Selesaikan Pesanan
             </button>
+
+
+
+<!-- Popup Form -->
+<div id="popup-pemesanan" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-white w-96 p-6 rounded-lg shadow-lg">
+        <h2 class="text-2xl font-semibold mb-4">Informasi Pemesan</h2>
+        <form id="form-pemesanan">
+            <div class="mb-4">
+                <label for="nama-pemesan" class="block text-gray-700">Nama Pemesan</label>
+                <input type="text" id="nama-pemesan" class="w-full px-4 py-2 border rounded-lg" required>
+            </div>
+            <div class="mb-4">
+                <label for="nim-pemesan" class="block text-gray-700">NIM</label>
+                <input type="text" id="nim-pemesan" class="w-full px-4 py-2 border rounded-lg" required>
+            </div>
+            <button type="button" onclick="konfirmasiPesanan()" class="w-full bg-green-500 text-white py-2 rounded-lg">
+                Konfirmasi Pesanan
+            </button>
+        </form>
+        <button onclick="tutupPopup()" class="text-red-500 mt-4 text-sm underline block text-center">
+            Batal
+        </button>
+    </div>
+</div>
+
+
         </div>
 
         <!-- Konten Utama -->
@@ -116,6 +143,8 @@ $result_produk = mysqli_query($conn, $query_produk);
     </div>
 
     <script>
+
+        
         // Fungsi Sidebar
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
@@ -139,24 +168,42 @@ $result_produk = mysqli_query($conn, $query_produk);
         }
 
         function updateSidebar() {
-            const pesananKosong = document.getElementById('pesanan-kosong');
-            const listPesanan = document.getElementById('list-pesanan');
+    const pesananKosong = document.getElementById('pesanan-kosong');
+    const listPesanan = document.getElementById('list-pesanan');
+    const btnSelesaikanPesanan = document.getElementById('btn-selesaikan-pesanan'); // Tombol Selesaikan Pesanan
+    let totalHarga = 0;
 
-            if (pesanan.length > 0) {
-                pesananKosong.classList.add('hidden');
-                listPesanan.classList.remove('hidden');
-                listPesanan.innerHTML = '';
+    // Periksa apakah ada item di array pesanan
+    if (pesanan.length > 0) {
+        pesananKosong.classList.add('hidden'); // Sembunyikan pesan "Belum Ada Pesanan"
+        listPesanan.classList.remove('hidden'); // Tampilkan daftar pesanan
+        listPesanan.innerHTML = ''; // Kosongkan daftar sebelumnya
 
-                pesanan.forEach((item, index) => {
-                    listPesanan.innerHTML += `
-                        <li class="flex justify-between items-center p-2 border-b">
-                            <span>${item.nama}</span>
-                            <span>Rp ${item.harga.toLocaleString()}</span>
-                        </li>
-                    `;
-                });
-            }
-        }
+        // Render ulang daftar pesanan
+        pesanan.forEach((item) => {
+            listPesanan.innerHTML += `
+                <li class="flex justify-between items-center p-2 border-b">
+                    <span>${item.nama}</span>
+                    <span>Rp ${item.harga.toLocaleString()}</span>
+                </li>
+            `;
+            totalHarga += item.harga; // Tambahkan harga item ke total
+        });
+
+        // Perbarui teks tombol dengan total harga
+        btnSelesaikanPesanan.textContent = `Total: Rp ${totalHarga.toLocaleString()} `;
+    } else {
+        // Tampilkan pesan "Belum Ada Pesanan" jika array kosong
+        pesananKosong.classList.remove('hidden');
+        listPesanan.classList.add('hidden');
+
+        // Reset teks tombol "Selesaikan Pesanan"
+        btnSelesaikanPesanan.textContent = 'Selesaikan Pesanan';
+    }
+}
+
+            
+        
     </script>
 </body>
 </html>
