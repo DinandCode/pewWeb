@@ -5,12 +5,13 @@ use Google\Client;
 use Google\Service\Drive;
 
 // Inisialisasi Google Client
-function getClient() {
-   
+function getClient()
+{
+
     $client = new Google\Client();
     $client->setClientId('59316830799-9la0qkvpkkpu9ra998rs1c8u2s8egp7k.apps.googleusercontent.com');
     $client->setClientSecret('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');
-    $client->refreshToken('1//04ANytfY0R4YNCgYIARAAGAQSNwF-L9IrIHYlgkkFbam5lyOzLseQK4al1AJM0OUw07IP8-1G7A7kS3pTh192OD5YssE3gHcgTy0');
+    $client->refreshToken('1//04mK4a__JdMuQCgYIARAAGAQSNwF-L9IrbpjH3tmWN-VsH55C7hCpaqqnJb6QIWa4WSDEqCRNhCo2BEE4yF-b1SAVFnwTS3rl_L0');
 
     return $client;
 }
@@ -40,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fileUpload'])) {
         'uploadType' => 'multipart'
     ]);
 
-        echo "<script> 
+    echo "<script> 
         
         const waNumber = '6281944433862'; // Ganti dengan nomor WhatsApp tujuan
             const message = `Halo, saya ingin memesan fotokopi dengan rincian berikut:
